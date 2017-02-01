@@ -28,9 +28,7 @@
     </files>
         
     <administration>
-
-      <menu img="class:categories">COM_FOLIO_MENU</menu>
-        
+      <menu img="class:categories">COM_FOLIO_MENU</menu>       
         <files folder="admin">
           <filename>index.html</filename>
           <filename>access.xml</filename>
@@ -43,12 +41,10 @@
           <folder>sql</folder>
           <folder>tables</folder>
           <folder>views</folder>
-        </files>
-        
+        </files>        
         <languages folder="admin">
 			    <language tag="en-GB">language/en-GB.com_library.ini</language>
 			    <language tag="en-GB">language/en-GB.com_library.sys.ini</language>
-        </languages>
-        
+        </languages>        
     </administration>
 </extension>

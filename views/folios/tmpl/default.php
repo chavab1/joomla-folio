@@ -1,7 +1,7 @@
 <?php
     defined('_JEXEC') or die;
-    $listOrder  = '';
-    $listDirn  = '';
+    $listOrder = $this->escape($this->state->get('list.ordering'));
+    $listDirn = $this->escape($this->state->get('list.direction'));
 ?>
 
 <form action="<?php echo JRoute::_('index.php?option=com_ folio&view=folios'); ?>" method="post" name="adminForm" id="adminForm">
@@ -16,6 +16,12 @@
                     <th class="title">
                         <?php echo JHtml::_('grid.sort', 'JGLOBAL_TITLE', 'a.title', $listDirn, $listOrder); ?>
                     </th>
+                    <th width="25%" class="nowrap hidden-phone">
+                        <?php echo JHtml::_('grid.sort', 'COM_FOLIO_HEADING_COMPANY', 'a.company', $listDirn, $listOrder); ?>
+                    </th>
+                    <th width="1%" class="nowrap center hidden-phone">
+                        <?php echo JHtml::_('grid.sort', 'JGRID_HEADING_ID', 'a.id', $listDirn, $listOrder); ?>
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -26,6 +32,12 @@
                     </td>
                     <td class="nowrap has-context">
                         <a href="<?php echo  JRoute::_('index.php?option=com_folio&task= folio.edit&id='.(int) $item->id); ?>"><?php echo $this->escape($item->title); ?></a>
+                    </td>
+                    <td class="hidden-phone">
+                        <?php echo $this->escape($item->company); ?>
+                    </td>
+                    <td class="center hidden-phone">
+                        <?php echo (int) $item->id; ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>
