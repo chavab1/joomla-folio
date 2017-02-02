@@ -27,6 +27,8 @@
         {
             $canDo  = FolioHelper::getActions();
             $bar = JToolBar::getInstance('toolbar');
+            $state = $this->get('State');
+
             JToolbarHelper::title(JText::_('COM_FOLIO_MANAGER_FOLIOS'), '');
             JToolbarHelper::addNew('folio.add');
 
@@ -46,9 +48,14 @@
                 JToolbarHelper::archiveList('folios.archive');
                 JToolbarHelper::checkin('folios.checkin');
             }
-            if ($canDo->get('core.delete'))
+
+            if ($state->get('filter.state') == -2 && $canDo->get('core.delete'))
             {
-                JToolBarHelper::deleteList('', 'folios.delete', 'JTOOLBAR_DELETE');
+                JToolbarHelper::deleteList('', 'folios.delete', 'JTOOLBAR_EMPTY_ TRASH');
+            }
+            elseif ($canDo->get('core.edit.state'))
+            {
+                JToolbarHelper::trash('folios.trash');
             }
 
             JHtmlSidebar::setAction('index.php?option=com_folio&view=folios');
