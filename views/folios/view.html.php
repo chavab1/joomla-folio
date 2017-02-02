@@ -8,6 +8,7 @@
         protected $state;
         protected $pagination;
 
+
         public function display($tpl = null)
         {
             //Retrieves Data
@@ -16,6 +17,8 @@
             $this->state = $this->get('State');
             //Allows Backend Pagination
             $this->pagination = $this->get('Pagination');
+            // Makes View Active in Submenu
+            FolioHelper::addSubmenu('folios');
 
             if (count($errors = $this->get('Errors')))
             {
