@@ -16,16 +16,6 @@
     <IncludeDebugInformation>false</IncludeDebugInformation>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="admin\controller.php" />
-    <Compile Include="admin\controllers\folio.php" />
-    <Compile Include="admin\controllers\folios.php" />
-    <Compile Include="admin\controllers\index.html" />
-    <Compile Include="admin\folio.php" />
-    <Compile Include="admin\helpers\folio.php" />
-    <Compile Include="admin\helpers\index.html" />
-    <Compile Include="admin\models\folio.php" />
-    <Compile Include="admin\models\folios.php" />
-    <Compile Include="admin\models\index.html" />
     <Compile Include="controller.php" />
     <Compile Include="controllers\folio.php" />
     <Compile Include="controllers\folios.php" />
@@ -35,19 +25,6 @@
     <Compile Include="models\folios.php" />
     <Compile Include="script.php" />
     <Compile Include="site\script.php" />
-    <Compile Include="admin\sql\index.html" />
-    <Compile Include="admin\sql\install.mysql.utf8.sql" />
-    <Compile Include="admin\sql\uninstall.mysql.utf8.sql" />
-    <Compile Include="admin\tables\folio.php" />
-    <Compile Include="admin\tables\index.html" />
-    <Compile Include="admin\views\folios\tmpl\default.php" />
-    <Compile Include="admin\views\folios\view.html.php" />
-    <Compile Include="admin\views\folio\tmpl\edit.php" />
-    <Compile Include="admin\views\folio\view.html.php" />
-    <Compile Include="admin\views\index.html" />
-    <Compile Include="admin\language\en-GB\index.html" />
-    <Compile Include="admin\language\en-GB\en-GB.com_folio.sys.ini" />
-    <Compile Include="admin\language\index.html" />
     <Compile Include="index.html" />
     <Compile Include="folio.xml" />
     <Compile Include="tables\folio.php" />
@@ -57,11 +34,6 @@
     <Compile Include="views\folio\view.html.php" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="admin\controllers\" />
-    <Folder Include="admin\helpers\" />
-    <Folder Include="admin\models\" />
-    <Folder Include="admin\models\forms\" />
-    <Folder Include="admin\" />
     <Folder Include="controllers\" />
     <Folder Include="helpers\" />
     <Folder Include="language\" />
@@ -69,15 +41,6 @@
     <Folder Include="models\" />
     <Folder Include="models\forms\" />
     <Folder Include="site\" />
-    <Folder Include="admin\sql\" />
-    <Folder Include="admin\tables\" />
-    <Folder Include="admin\views\" />
-    <Folder Include="admin\language\en-GB\" />
-    <Folder Include="admin\language\" />
-    <Folder Include="admin\views\folios\" />
-    <Folder Include="admin\views\folios\tmpl\" />
-    <Folder Include="admin\views\folio\" />
-    <Folder Include="admin\views\folio\tmpl\" />
     <Folder Include="sql\" />
     <Folder Include="tables\" />
     <Folder Include="views\" />
@@ -88,11 +51,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="access.xml" />
-    <Content Include="admin\access.xml" />
-    <Content Include="admin\config.xml" />
-    <Content Include="admin\index.html" />
-    <Content Include="admin\language\en-GB\en-GB.com_folio.ini" />
-    <Content Include="admin\models\forms\folio.xml" />
     <Content Include="config.xml" />
     <Content Include="controllers\index.html" />
     <Content Include="helpers\index.html" />

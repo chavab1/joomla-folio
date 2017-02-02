@@ -38,12 +38,25 @@
             {
                 JToolbarHelper::preferences('com_folio');
             }
+            if ($canDo->get('core.edit.state'))
+            {
+                JToolbarHelper::publish('folios.publish', 'JTOOLBAR_PUBLISH', true);
+                JToolbarHelper::unpublish('folios.unpublish', 'JTOOLBAR_UNPUBLISH', true);
+
+                JToolbarHelper::archiveList('folios.archive');
+                JToolbarHelper::checkin('folios.checkin');
+            }
+            if ($canDo->get('core.delete'))
+            {
+                JToolBarHelper::deleteList('', 'folios.delete', 'JTOOLBAR_DELETE');
+            }
         }
 
         protected function getSortFields()
         {
             return array(
-                'a.ordering' => JText::_('JGRID_HEADING_ORDERING'), 'a.state' => JText::_('JSTATUS'),
+                'a.ordering' => JText::_('JGRID_HEADING_ORDERING'),
+                'a.state' => JText::_('JSTATUS'),
                 'a.title' => JText::_('JGLOBAL_TITLE'),
                 'a.id' => JText::_('JGRID_HEADING_ID')
             );
