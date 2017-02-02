@@ -19,7 +19,7 @@
                 return false;
             }
             $this->addToolbar();
-
+            $this->sidebar = JHtmlSidebar::render();
             parent::display($tpl);
         }
 
@@ -50,7 +50,13 @@
             {
                 JToolBarHelper::deleteList('', 'folios.delete', 'JTOOLBAR_DELETE');
             }
+
+            JHtmlSidebar::setAction('index.php?option=com_folio&view=folios');
+
+            JHtmlSidebar::addFilter(JText::_('JOPTION_SELECT_PUBLISHED'), 'filter_state', JHtml::_('select.options', JHtml::_('jgrid.publishedOptions'), 'value', 'text', $this->state->get('filter.state'), true));
         }
+
+
 
         protected function getSortFields()
         {

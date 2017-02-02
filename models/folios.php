@@ -25,6 +25,8 @@
 
         protected function populateState($ordering = null, $direction = null)
         {
+            $published = $this->getUserStateFromRequest($this->context.'.filter.state', 'filter_state', '', 'string');
+            $this->setState('filter.state', $published);
             parent::populateState('a.ordering', 'asc');
         }
 
@@ -40,6 +42,15 @@
                                     )
                             );
             $query->from($db->quoteName('#__folio').' AS a');
+
+            $published = $this->getState('filter.state');
+            if (is_numeric($published))
+            {
+                $query->where('a.state = '.(int) $published);
+            } elseif ($published === '')
+            {
+                $query->where('(a.state IN (0, 1))');
+            }
             $orderCol = $this->state->get('list.ordering');
             $orderDirn = $this->state->get('list.direction');
             $query->order($db->escape($orderCol.' '.$orderDirn));

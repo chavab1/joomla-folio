@@ -34,7 +34,14 @@
 </script>
 
 <form action="<?php echo JRoute::_('index.php?option=com_ folio&view=folios'); ?>" method="post" name="adminForm" id="adminForm">
-    <div id="j-main-container" class="span10">
+    <?php if (!empty( $this->sidebar)) : ?>
+        <div id="j-sidebar-container" class="span2">
+            <?php echo $this->sidebar; ?>
+        </div>
+        <div id="j-main-container" class="span10">
+    <?php else : ?>
+        <div id="j-main-container">
+    <?php endif;?>
         <div class="clearfix"></div>
         <table class="table table-striped" id="folioList">
             <thead>
