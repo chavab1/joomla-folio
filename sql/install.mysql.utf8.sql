@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS `#__folio` (
 	`description` TEXT, 
 	`publish_up` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
 	`publish_down` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
+	`ordering` INT(11) NOT NULL DEFAULT '0', 
 	PRIMARY KEY (`id`)
 ) DEFAULT COLLATE=utf8_general_ci AUTO_INCREMENT=1;
 

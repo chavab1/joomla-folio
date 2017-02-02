@@ -15,7 +15,8 @@
                                             'state', 'a.state',
                                             'company', 'a.company',
                                             'publish_up', 'a.publish_up',
-                                            'publish_down', 'a.publish_down'
+                                            'publish_down', 'a.publish_down',
+                                            'ordering', 'a.ordering'
                                             );
             } // End if (empty($config['filter_fields']))
 
@@ -24,7 +25,7 @@
 
         protected function populateState($ordering = null, $direction = null)
         {
-            parent::populateState('a.title', 'asc');
+            parent::populateState('a.ordering', 'asc');
         }
 
         protected function getListQuery()
@@ -35,7 +36,7 @@
                                     'list.select',
                                     'a.id, a.title,' .
                                     'a.state, a.company,' .
-                                    'a.publish_up, a.publish_down'
+                                    'a.publish_up, a.publish_down, a.ordering'
                                     )
                             );
             $query->from($db->quoteName('#__folio').' AS a');

@@ -4,7 +4,34 @@
     $user = JFactory::getUser();
     $listOrder = $this->escape($this->state->get('list.ordering'));
     $listDirn = $this->escape($this->state->get('list.direction'));
+    $canOrder = $user->authorise('core.edit.state', 'com_folio');
+    $saveOrder = $listOrder == 'a.ordering';
+
+    if ($saveOrder)
+    {
+        $saveOrderingUrl = 'index.php?option=com_folio&task=folios.saveOrderAjax&tmpl=component';
+        JHtml::_('sortablelist.sortable', 'folioList', 'adminForm', strtolower($listDirn), $saveOrderingUrl);
+    }
+    $sortFields = $this->getSortFields();
 ?>
+
+<script type="text/javascript">
+    Joomla!.orderTable = function()
+    {
+        table = document.getElementById("sortTable");
+        direction = document.getElementById("directionTable");
+        order = table.options[table.selectedIndex].value;
+        if (order != '<?php echo $listOrder; ?>')
+        {
+            dirn = 'asc';
+        }
+        else
+        {
+            dirn = direction.options[direction.selectedIndex].value;
+        }
+        Joomla!.tableOrdering(order, dirn, '');
+    }
+</script>
 
 <form action="<?php echo JRoute::_('index.php?option=com_ folio&view=folios'); ?>" method="post" name="adminForm" id="adminForm">
     <div id="j-main-container" class="span10">
@@ -12,6 +39,9 @@
         <table class="table table-striped" id="folioList">
             <thead>
                 <tr>
+                    <th width="1%" class="nowrap center hidden-phone">
+                        <?php echo JHtml::_('grid.sort', '<i class="icon-menu-2"></i>', 'a.ordering', $listDirn, $listOrder, null, 'asc', 'JGRID_HEADING_ORDERING'); ?>
+                    </th>
                     <th width="1%" class="hidden-phone">
                         <input type="checkbox" name="checkall-toggle" value="" title="<?php echo JText::_('JGLOBAL_CHECK_ALL'); ?>" onclick="Joomla.checkAll(this)" />
                     </th>
@@ -34,7 +64,25 @@
                     $canCheckin = $user->authorise('core.manage', 'com_ checkin') || $item->checked_out == $user->get('id') || $item->checked_out == 0;
                     $canChange  = $user->authorise('core.edit.state', 'com_folio') && $canCheckin;
                 ?>
-                <tr class="row<?php echo $i % 2; ?>">
+                <tr class="row<?php echo $i % 2; ?>" sortable-group-id="1">
+                    <td class="order nowrap center hidden-phone">
+                        <?php if ($canChange) :
+                            $disableClassName = '';
+                            $disabledLabel   = '';
+                            if (!$saveOrder) :
+                                $disabledLabel = JText::_('JORDERINGDISABLED');
+                                $disableClassName = 'inactive tip-top';
+                            endif; ?>
+                            <span class="sortable-handler hasTooltip <?php echo $disableClassName?>" title="<?php echo $disabledLabel?>">
+                                <i class="icon-menu"></i
+                            </span>
+                            <input type="text" style="display:none" name="order[]" size="5" value="<?php echo $item->ordering;?>" class="width-20 text-area-order " />
+                        <?php else : ?>
+                            <span class="sortable-handler inactive">
+                                <i class="icon-menu"></i>
+                            </span >
+                        <?php endif; ?>
+                    </td>
                     <td class="center hidden-phone">
                         <?php echo JHtml::_('grid.id', $i, $item->id); ?>
                     </td>
@@ -42,7 +90,9 @@
                         <?php echo JHtml::_('jgrid.published', $item->state, $i, 'folios.', $canChange, 'cb', $item->publish_up, $item->publish_down); ?>
                     </td>
                     <td class="nowrap has-context">
-                        <a href="<?php echo  JRoute::_('index.php?option=com_folio&task= folio.edit&id='.(int) $item->id); ?>"><?php echo $this->escape($item->title); ?></a>
+                        <a href="<?php echo  JRoute::_('index.php?option=com_folio&task= folio.edit&id='.(int) $item->id); ?>">
+                            <?php echo $this->escape($item->title); ?>
+                        </a>
                     </td>
                     <td class="hidden-phone">
                         <?php echo $this->escape($item->company); ?>

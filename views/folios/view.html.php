@@ -40,4 +40,12 @@
             }
         }
 
+        protected function getSortFields()
+        {
+            return array(
+                'a.ordering' => JText::_('JGRID_HEADING_ORDERING'), 'a.state' => JText::_('JSTATUS'),
+                'a.title' => JText::_('JGLOBAL_TITLE'),
+                'a.id' => JText::_('JGRID_HEADING_ID')
+            );
+        }
     }
