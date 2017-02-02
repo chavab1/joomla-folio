@@ -25,6 +25,8 @@
 
         protected function populateState($ordering = null, $direction = null)
         {
+            $search = $this->getUserStateFromRequest($this->context.'.filter. search', 'filter_search');
+            $this->setState('filter.search', $search);
             $published = $this->getUserStateFromRequest($this->context.'.filter.state', 'filter_state', '', 'string');
             $this->setState('filter.state', $published);
             parent::populateState('a.ordering', 'asc');
@@ -50,6 +52,20 @@
             } elseif ($published === '')
             {
                 $query->where('(a.state IN (0, 1))');
+            }
+
+            // Filter by search in title
+            $search = $this->getState('filter.search');
+            if (!empty($search))
+            {
+                if (stripos($search, 'id:') === 0)
+                {
+                    $query->where('a.id = '.(int) substr($search, 3));
+                }
+                else{
+                    $search = $db->Quote('%'.$db->escape($search, true).'%');
+                    $query->where('(a.title LIKE '.$search.' OR a.company LIKE '.$search.')');
+                }
             }
             $orderCol = $this->state->get('list.ordering');
             $orderDirn = $this->state->get('list.direction');

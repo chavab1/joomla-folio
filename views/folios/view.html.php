@@ -51,7 +51,7 @@
 
             if ($state->get('filter.state') == -2 && $canDo->get('core.delete'))
             {
-                JToolbarHelper::deleteList('', 'folios.delete', 'JTOOLBAR_EMPTY_ TRASH');
+                JToolbarHelper::deleteList('', 'folios.delete', 'JTOOLBAR_EMPTY_TRASH');
             }
             elseif ($canDo->get('core.edit.state'))
             {
