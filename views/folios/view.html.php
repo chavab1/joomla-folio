@@ -6,11 +6,16 @@
     {
         protected $items;
         protected $state;
+        protected $pagination;
 
         public function display($tpl = null)
         {
+            //Retrieves Data
             $this->items = $this->get('Items');
+            //Retrieves User State
             $this->state = $this->get('State');
+            //Allows Backend Pagination
+            $this->pagination = $this->get('Pagination');
 
             if (count($errors = $this->get('Errors')))
             {

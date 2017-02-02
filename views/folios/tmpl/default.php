@@ -42,6 +42,7 @@
     <?php else : ?>
         <div id="j-main-container">
     <?php endif;?>
+    <!--Toolbar-->
     <div id="filter-bar" class="btn-toolbar">
         <div class="filter-search btn-group pull-left">
             <label for="filter_search" class="element-invisible">
@@ -57,6 +58,14 @@
                 <i class="icon-remove"></i>
             </button>
         </div>
+        <!--Pagination Input-->
+        <div class="btn-group pull-right hidden-phone">
+            <label for="limit" class="element-invisible">
+                <?php echo JText::_('JFIELD_PLG_SEARCH_SEARCHLIMIT_DESC');?>
+            </label>
+            <?php echo $this->pagination->getLimitBox(); ?>
+        </div>
+        <!--End Pagination Input-->
         <div class="btn-group pull-right hidden-phone">
             <label for="directionTable" class="element-invisible"><?php echo JText::_('JFIELD_ORDERING_DESC');?></label>       
             <select name="directionTable" id="directionTable" class="input-medium" onchange="Joomla!.orderTable()">
@@ -73,6 +82,7 @@
             </select>
         </div>
     </div>
+    <!--End Toolbar-->
         <div class="clearfix"></div>
         <table class="table table-striped" id="folioList">
             <thead>
@@ -141,6 +151,7 @@
                 </tr>
                 <?php endforeach; ?>
             </tbody>
+
         </table>
             <input type="hidden" name="task" value="" />
             <input type="hidden" name="boxchecked" value="0" />
