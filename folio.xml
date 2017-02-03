@@ -24,7 +24,13 @@
     </uninstall>
 
     <files folder="site">
-        <filename>index.html</filename>
+      <filename>index.html</filename>
+      <filename>controller.php</filename>
+      <filename>folio.php</filename>
+      <folder>controllers</folder>
+      <folder>language</folder>
+      <folder>models</folder>
+      <folder>views</folder>
     </files>
         
     <administration>

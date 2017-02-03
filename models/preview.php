@@ -29,7 +29,7 @@
          */
         protected function getListQuery()
         {
-            
+
             $db    = $this->getDbo();
             $query  = $db->getQuery(true);
             $query->select(
@@ -42,7 +42,7 @@
             );
             $query->from($db->quoteName('#__folio').' AS a');
             $query->where('(a.state IN (0, 1))');
-            $query->where('a.image!=""');
+            $query->where("a.image NOT LIKE ''");
             return $query;
         }
     }
