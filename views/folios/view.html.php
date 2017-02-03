@@ -33,12 +33,23 @@
 
         protected function addToolbar()
         {
-            $canDo  = FolioHelper::getActions();
-            $bar = JToolBar::getInstance('toolbar');
-            $state = $this->get('State');
+            //Retrieves User State
+            $state  = $this->get('State');
+            //Checks to see what category is selected
+            $canDo  = FolioHelper::getActions($state->get('filter.category_id'));
+            //Retrieves current user
+            $user  = JFactory::getUser();
 
+            $bar = JToolBar::getInstance('toolbar');
+
+            //Sets title name of Toolbar
             JToolbarHelper::title(JText::_('COM_FOLIO_MANAGER_FOLIOS'), '');
-            JToolbarHelper::addNew('folio.add');
+
+            // Display New button to allow current user to create a node only if authorized
+            if (count($user->getAuthorisedCategories('com_folio', 'core.create')) > 0)
+            {
+                JToolbarHelper::addNew('folio.add');
+            }
 
             if ($canDo->get('core.edit'))
             {

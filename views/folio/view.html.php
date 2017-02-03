@@ -23,8 +23,32 @@
         protected function addToolbar()
         {
             JFactory::getApplication()->input->set('hidemainmenu', true);
+
+            // Get current user info to check for permission
+            $user = JFactory::getUser();
+            $userId = $user->get('id');
+            $isNew = ($this->item->id == 0);
+            $canDo = FolioHelper::getActions($this->item->catid, 0);
+
             JToolbarHelper::title(JText::_('COM_FOLIO_MANAGER_FOLIO'), '');
-            JToolbarHelper::save('folio.save');
+
+            // Checks current user authorization to add nodes
+            if ($canDo->get('core.edit')||(count($user->getAuthorisedCategories('com_folio', 'core.create'))))
+            {
+                JToolbarHelper::apply('folio.apply');
+                JToolbarHelper::save('folio.save');
+            }
+
+            if (count($user->getAuthorisedCategories('com_folio', 'core. create')))
+            {
+                JToolbarHelper::save2new('folio.save2new');
+            }
+
+            // If an existing item, can save to a copy.
+            if (!$isNew && (count($user->getAuthorisedCategories('com_folio', 'core.create')) > 0))
+            {
+                JToolbarHelper::save2copy('folio.save2copy');
+            }
 
             if (empty($this->item->id))
             {

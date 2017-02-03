@@ -4,7 +4,8 @@
     $user = JFactory::getUser();
     $listOrder = $this->escape($this->state->get('list.ordering'));
     $listDirn = $this->escape($this->state->get('list.direction'));
-    $canOrder = $user->authorise('core.edit.state', 'com_folio');
+    //Check category permissions to allow current user to change ordering of items
+    $canOrder = $user->authorise('core.edit.state', 'com_folio.category');
     $saveOrder = $listOrder == 'a.ordering';
 
     if ($saveOrder)
@@ -111,6 +112,7 @@
                 <?php foreach ($this->items as $i => $item) :
                     $canCheckin = $user->authorise('core.manage', 'com_ checkin') || $item->checked_out == $user->get('id') || $item->checked_out == 0;
                     $canChange  = $user->authorise('core.edit.state', 'com_folio') && $canCheckin;
+                    $canEdit    = $user->authorise('core.edit', 'com_folio. category.' . $item->catid);
                 ?>
                 <tr class="row<?php echo $i % 2; ?>" sortable-group-id="1">
                     <td class="order nowrap center hidden-phone">
@@ -138,9 +140,14 @@
                         <?php echo JHtml::_('jgrid.published', $item->state, $i, 'folios.', $canChange, 'cb', $item->publish_up, $item->publish_down); ?>
                     </td>
                     <td class="nowrap has-context">
+                        <!--Show Edit Button only if current user has permission-->
+                        <?php if ($canEdit) : ?>
                         <a href="<?php echo  JRoute::_('index.php?option=com_folio&task= folio.edit&id='.(int) $item->id); ?>">
                             <?php echo $this->escape($item->title); ?>
                         </a>
+                        <?php else : ?>
+                            <?php echo $this->escape($item->title); ?>
+                        <?php endif; ?>
                     </td>
                     <td class="hidden-phone">
                         <?php echo $this->escape($item->company); ?>

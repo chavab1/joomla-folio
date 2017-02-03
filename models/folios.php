@@ -16,7 +16,8 @@
                                             'company', 'a.company',
                                             'publish_up', 'a.publish_up',
                                             'publish_down', 'a.publish_down',
-                                            'ordering', 'a.ordering'
+                                            'ordering', 'a.ordering',
+                                            'catid', 'a.catid', 'category_title'
                                             );
             } // End if (empty($config['filter_fields']))
 
@@ -38,7 +39,7 @@
             $query  = $db->getQuery(true);
             $query->select($this->getState(
                                     'list.select',
-                                    'a.id, a.title,' .
+                                    'a.id, a.title, a.catid,' .
                                     'a.state, a.company,' .
                                     'a.publish_up, a.publish_down, a.ordering'
                                     )
@@ -54,6 +55,10 @@
                 $query->where('(a.state IN (0, 1))');
             }
 
+            // Join over the categories.
+            $query->select('c.title AS category_title');
+            $query->join('LEFT', '#__categories AS c ON c.id = a.catid');
+
             // Filter by search in title
             $search = $this->getState('filter.search');
             if (!empty($search))
@@ -67,8 +72,16 @@
                     $query->where('(a.title LIKE '.$search.' OR a.company LIKE '.$search.')');
                 }
             }
+
+            // Add the list ordering clause.
             $orderCol = $this->state->get('list.ordering');
             $orderDirn = $this->state->get('list.direction');
+
+            if ($orderCol == 'a.ordering')
+            {
+                $orderCol = 'c.title '.$orderDirn.', a.ordering';
+            }
+
             $query->order($db->escape($orderCol.' '.$orderDirn));
             return $query;
         }

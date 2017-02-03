@@ -28,7 +28,12 @@
     </files>
         
     <administration>
-      <menu img="class:categories">COM_FOLIO_MENU</menu>       
+      <menu img="class:categories">COM_FOLIO_MENU</menu>
+      <submenu>
+        <menu link="option=com_folio" view="folios" img="class:generic" alt="Folio/Folios">com_folio_folios</menu>
+        <menu link="option=com_categories&amp;extension=com_folio" view="categories" img="class:categories" alt="Folio/Categories">com_folio_categories</menu>
+        <menu link="option=com_folio&amp;view=preview" img="class:generic" alt="Folio/Preview">com_folio_preview</menu>
+      </submenu>
         <files folder="admin">
           <filename>index.html</filename>
           <filename>access.xml</filename>

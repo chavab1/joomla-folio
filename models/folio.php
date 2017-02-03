@@ -38,4 +38,46 @@
         {
             $table->title = htmlspecialchars_decode($table->title,ENT_QUOTES);
         }
+
+        /**
+         * Make sure current user has permission to delete the node
+         * @param mixed $record
+         */
+        protected function canDelete($record)
+        {
+            if (!empty($record->id))
+            {
+                if ($record->state != -2)
+                {
+                    return;
+                }
+                $user = JFactory::getUser();
+                if ($record->catid)
+                {
+                    return $user->authorise('core.delete', 'com_folio.category.'.(int) $record->catid);
+                }
+                else{
+                    return parent::canDelete($record);
+                }
+            }
+        }
+
+        /**
+         * Make sure current user has permission to edit the state of a node
+         * @param mixed $record
+         * @return mixed
+         */
+        protected function canEditState($record)
+        {
+            $user = JFactory::getUser();
+
+            if (!empty($record->catid))
+            {
+                return $user->authorise('core.edit.state', 'com_folio.category.'.(int) $record->catid);
+            }
+            else
+            {
+                return parent::canEditState($record);
+            }
+        }
     }
