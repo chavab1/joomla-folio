@@ -13,7 +13,7 @@
       <option value="2">JARCHIVED</option>
       <option value="-2">JTRASHED</option>
     </field>
-    <field name="image" type="media" directory="" hide_none="1" label="COM_FOLIO_FIELD_IMAGE_LABEL" size="40" description="COM_FOLIO_FIELD_IMAGE_DESC"  />
+    <field name="image" type="media" directory="com_folio" hide_none="1" label="COM_FOLIO_FIELD_IMAGE_LABEL" size="40" description="COM_FOLIO_FIELD_IMAGE_DESC"  />
     <field name="company" type="text" class="inputbox" size="40" label="COM_FOLIO_FIELD_COMPANY_LABEL" description="COM_FOLIO_FIELD_COMPANY_DESC" required="true" />
     <field name="phone" type="tel" id="phone" description="COM_FOLIO_FIELD_PHONE_DESC" filter="string" label="COM_FOLIO_FIELD_PHONE_LABEL" size="30" validate="tel" />
     <field name="url" type="text" description="COM_FOLIO_FIELD_URL_DESC" label="COM_FOLIO_FIELD_URL_LABEL" size="40" maxlength="255" />

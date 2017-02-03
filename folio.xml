@@ -32,7 +32,13 @@
       <folder>models</folder>
       <folder>views</folder>
     </files>
-        
+
+  <media destination="com_folio" folder="media">
+    <filename>index.html</filename>
+    <folder>css</folder>
+    <folder>images</folder>
+  </media>
+  
     <administration>
       <menu img="class:categories">COM_FOLIO_MENU</menu>
       <submenu>
