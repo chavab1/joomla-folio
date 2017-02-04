@@ -7,6 +7,9 @@
       <option value="2">JBROWSERTARGET_POPUP</option>
       <option value="3">JBROWSERTARGET_MODAL</option>      
     </field>
+    <field name="targetwidth" type="text" default="400" size="40" label="COM_FOLIO_FIELD_TARGETWIDTH_LABEL" description="COM_FOLIO_FIELD_TARGETWIDTH_DESC" />
+    <field name="targetheight" type="text" default="400" size="40" label="COM_FOLIO_FIELD_TARGETHEIGHT_LABEL" description="COM_FOLIO_FIELD_TARGETHEIGHT_DESC" />
+    <field name="imagewidth" type="text" default="200" size="40" label="COM_FOLIO_FIELD_IMAGEWIDTH_LABEL" description="COM_FOLIO_FIELD_IMAGEWIDTH_DESC" />
   </fieldset>
   <fieldset name="permissions" description="JCONFIG_PERMISSIONS_DESC" label="JCONFIG_PERMISSIONS_LABEL">
     <field name="rules" type="rules" component="com_folio" filter="rules" validate="rules" label="JCONFIG_PERMISSIONS_LABEL" section="component" />
