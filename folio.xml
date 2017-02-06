@@ -26,6 +26,7 @@
     <files folder="site">
       <filename>index.html</filename>
       <filename>controller.php</filename>
+      <folder>helpers</folder>
       <filename>folio.php</filename>
       <filename>komento_plugin.php</filename>      
       <folder>controllers</folder>

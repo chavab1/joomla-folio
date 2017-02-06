@@ -80,4 +80,33 @@
                 return parent::canEditState($record);
             }
         }
+
+
+        public function featured($pks, $value = 0)
+        {
+            // Sanitize the ids.
+            $pks = (array) $pks;
+            JArrayHelper::toInteger($pks);
+            if (empty($pks))
+            {
+                $this->setError(JText::_('COM_FOLIO_NO_ITEM_SELECTED'));
+                return false;
+            }
+            try
+            {
+                $db = $this->getDbo();
+                $db->setQuery('UPDATE #__folio' .' SET featured = ' . (int) $value .' WHERE id IN (' . implode(',', $pks) . ')'
+                );
+                $db->execute();
+            }
+            catch (Exception $e)
+            {
+                $this->setError($e->getMessage());
+                return false;
+            }
+            $this->cleanCache();
+            return true;
+
+        }
+
     }

@@ -1,6 +1,7 @@
 <?php
     defined('_JEXEC') or die;
 
+    JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
     $user = JFactory::getUser();
     $listOrder = $this->escape($this->state->get('list.ordering'));
     $listDirn = $this->escape($this->state->get('list.direction'));
@@ -138,6 +139,7 @@
                     </td>
                     <td class="center">
                         <?php echo JHtml::_('jgrid.published', $item->state, $i, 'folios.', $canChange, 'cb', $item->publish_up, $item->publish_down); ?>
+                        <?php echo JHtml::_('contentadministrator.featured', $item->featured, $i, $canChange); ?>
                     </td>
                     <td class="nowrap has-context">
                         <!--Show Edit Button only if current user has permission-->

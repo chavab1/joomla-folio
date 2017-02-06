@@ -12,6 +12,16 @@ CREATE TABLE IF NOT EXISTS `#__folio` (
 	`publish_up` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
 	`publish_down` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
 	`ordering` INT(11) NOT NULL DEFAULT '0', 
+	`checked_out` INT(11) NOT NULL DEFAULT '0',
+	`checked_out_time` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
+	`access` INT(11) NOT NULL DEFAULT '1',
+	`language` CHAR(7) NOT NULL DEFAULT '',
+	`created` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
+	`created_by` INT(10) unsigned NOT NULL DEFAULT '0',
+	`created_by_alias` VARCHAR(255) NOT NULL DEFAULT '',
+	`modified` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
+	`modified_by` INT(10) unsigned NOT NULL DEFAULT '0',
+	`featured` TINYINT(3) unsigned NOT NULL DEFAULT '0',
 	PRIMARY KEY (`id`)
 ) DEFAULT COLLATE=utf8_general_ci AUTO_INCREMENT=1;
 

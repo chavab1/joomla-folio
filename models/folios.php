@@ -17,6 +17,7 @@
                                             'publish_up', 'a.publish_up',
                                             'publish_down', 'a.publish_down',
                                             'ordering', 'a.ordering',
+                                            'featured', 'a.featured',
                                             'catid', 'a.catid', 'category_title'
                                             );
             } // End if (empty($config['filter_fields']))
@@ -40,7 +41,7 @@
             $query->select($this->getState(
                                     'list.select',
                                     'a.id, a.title, a.catid,' .
-                                    'a.state, a.company,' .
+                                    'a.state, a.company, a.featured,' .
                                     'a.publish_up, a.publish_down, a.ordering'
                                     )
                             );
