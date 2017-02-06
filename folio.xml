@@ -27,6 +27,7 @@
       <filename>index.html</filename>
       <filename>controller.php</filename>
       <filename>folio.php</filename>
+      <filename>komento_plugin.php</filename>      
       <folder>controllers</folder>
       <folder>language</folder>
       <folder>models</folder>
