@@ -6,6 +6,9 @@
     {
         protected $text_prefix = 'COM_FOLIO';
 
+
+
+
         public function getTable($type = 'Folio', $prefix = 'FolioTable', $config = array())
         {
             return JTable::getInstance($type, $prefix, $config);

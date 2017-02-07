@@ -5,19 +5,35 @@
     class FolioTableFolio extends JTable
     {
 
+        protected $tagsHelper = null;
+
         public function __construct(&$db)
         {
             parent::__construct('#__folio', 'id', $db);
+
+            $this->tagsHelper = new JHelperTags();
+            $this->tagsHelper->typeAlias = 'com_folio.folio';
         }
 
         public function bind($array, $ignore = '')
         {
+            if (isset($array['metadata']) && is_array($array['metadata']))
+            {
+                $registry = new JRegistry;
+                $registry->loadArray($array['metadata']);
+                $array['metadata'] = (string) $registry;
+            }
+
             return parent::bind($array, $ignore);
         }
 
         public function store($updateNulls = false)
         {
-            return parent::store($updateNulls);
+
+            $this->tagsHelper->preStoreProcess($this);
+            $result = parent::store($updateNulls);
+
+            return $result && $this->tagsHelper->postStoreProcess($this);
         }
 
         public function publish($pks = null, $state = 1, $userId = 0)
@@ -60,4 +76,11 @@
           $this->setError('');
           return true;
         }
+
+        public function delete($pk = null)
+        {
+            $result = parent::delete($pk);
+            return $result && $this->tagsHelper->deleteTagData($this, $pk);
+        }
+
     }

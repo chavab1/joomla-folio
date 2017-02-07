@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <form>
-  <fieldset>
-    <field name="id" type="text" default="0" label="JGLOBAL_FIELD_ID_ LABEL" readonly="true" class="readonly" description="JGLOBAL_FIELD_ID_DESC" />
+  <fieldset name="myfields">
+    <field name="id" type="text" default="0" label="JGLOBAL_FIELD_ID_LABEL" readonly="true" class="readonly" description="JGLOBAL_FIELD_ID_DESC" />
     <field name="title" type="text" class="inputbox" size="40" label="JGLOBAL_TITLE" description="COM_FOLIO_FIELD_TITLE_DESC" required="true" />
     <field name="alias" type="text" class="inputbox" size="40" label="JFIELD_ALIAS_LABEL" description="COM_FOLIO_FIELD_ALIAS_DESC" />
     <field name="catid" type="category" extension="com_folio" class="inputbox" default="" label="COM_FOLIO_FIELD_CATID_LABEL" description="COM_FOLIO_FIELD_CATID_DESC">
@@ -18,5 +18,12 @@
     <field name="phone" type="tel" id="phone" description="COM_FOLIO_FIELD_PHONE_DESC" filter="string" label="COM_FOLIO_FIELD_PHONE_LABEL" size="30" validate="tel" />
     <field name="url" type="text" description="COM_FOLIO_FIELD_URL_DESC" label="COM_FOLIO_FIELD_URL_LABEL" size="40" maxlength="255" />
     <field name="description" type="textarea" class="inputbox" rows="3" cols="30" label="JGLOBAL_DESCRIPTION" description="COM_FOLIO_FIELD_DESCRIPTION_DESC" />
+    <fields name="metadata">
+      <fieldset name="jmetadata" label="JGLOBAL_FIELDSET_METADATA_OPTIONS">
+        <field name="tags" type="tag" label="JTAG" description="JTAG_DESC" class="inputbox" multiple="true">
+        </field>
+      </fieldset>
+    </fields>
   </fieldset>
+ 
 </form>

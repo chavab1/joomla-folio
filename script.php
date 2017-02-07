@@ -56,8 +56,57 @@
             echo '<p>' . JText::_('COM_FOLIO_PREFLIGHT_' . $type .     '_TEXT') . '</p>';
         }
 
-        function postflight($type, $parent
+        function postflight($type, $parent)
         {
+
+            //Add Tag info to content type table
+            $table = JTable::getInstance('Contenttype', 'JTable');
+            if(!$table->load(array('type_alias' => 'com_folio.folio')))
+            {
+                $common = new stdClass;
+                $common->core_content_item_id = 'id';
+                $common->core_title = 'title';
+                $common->core_state = 'state';
+                $common->core_alias = 'alias';
+                $common->core_created_time = 'created';
+                $common->core_modified_time = 'modified';
+                $common->core_body = 'description';
+                $common->core_hits = 'hits';
+                $common->core_publish_up = 'publish_up';
+                $common->core_publish_down = 'publish_down';
+                $common->core_access = 'access';
+                $common->core_params = 'params';
+                $common->core_featured = 'featured';
+                $common->core_metadata = 'metadata';
+                $common->core_language = 'language';
+                $common->core_images = 'images';
+                $common->core_urls = 'urls';
+                $common->core_version = 'version';
+                $common->core_ordering = 'ordering';
+                $common->core_metakey = 'metakey';
+                $common->core_metadesc = 'metadesc';
+                $common->core_catid = 'catid';
+                $common->core_xreference = 'xreference';
+                $common->asset_id = null;
+                $field_mappings = new stdClass;
+                $field_mappings->common[] = $common;
+                $field_mappings->special = array();
+                $special = new stdClass;
+                $special->dbtable = '#__folio';
+                $special->key = 'id';
+                $special->type = 'Folio';
+                $special->prefix = 'FolioTable';
+                $special->config = 'array()';
+                $table_object = new stdClass;
+                $table_object->special = $special;
+                $contenttype['type_title'] = 'Folio';
+                $contenttype['type_alias'] = 'com_folio.folio';
+                $contenttype['table'] = json_encode($table_object);
+                $contenttype['rules'] = '';
+                $contenttype['router'] = 'FolioHelperRoute::getFolioRoute';
+                $contenttype['field_mappings'] = json_encode($field_mappings);
+                $table->save($contenttype);
+            }
             echo '<p>' . JText::_('COM_FOLIO_POSTFLIGHT_' . $type .     '_TEXT') . '</p>';
         }
     }
